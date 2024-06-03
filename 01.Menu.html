@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+            color: #932323;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(25, 0, 10, 0.7);
+            padding: 1em;
+            z-index: 10; /* Ensure nav is above other content */
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #ff7e5f;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5em;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover {
+            color: #ff7e5f;
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 2.5em;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1em;
+            border-radius: 5px;
+            list-style: none;
+            z-index: 20; /* Ensure submenu is above other content */
+        }
+
+        nav ul li ul li {
+            margin: 0;
+        }
+
+        nav ul li ul li ul {
+            left: 100%;
+            top: 0;
+        }
+
+        nav ul li ul li a {
+            padding: 0.5em;
+            display: block;
+            color: #fff;
+        }
+
+        /* Adjust submenu positioning */
+        nav ul li ul {
+            left: auto;
+            right: 0;
+        }
+
+        nav ul li:hover > ul {
+            display: block;
+        }
+
+        section {
+            position: relative;
+            padding: 2em;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            margin: 1em;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        section h1, section p {
+            position: relative;
+            z-index: 1;
+        }
+
+        section h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        section p {
+            font-size: 1.2em;
+        }
+
+        section h1 a {
+            text-decoration: none;
+            color: inherit; 
+        }
+
+        /* section h1 a:hover {
+            color: #ff7e5f;  Add a hover effect if desired 
+        } */
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">CMS</a>
+        <ul>
+            <li>
+                <a href="#menu" onclick="toggleSubMenu(event, 'menu-submenu')">Menu</a>
+                <ul id="menu-submenu">
+                    <li><a href="#receipt">Receipt</a></li>
+                    <li><a href="02.prospectus.html">Prospectus</a></li>
+                    <li><a href="03.RegistrationPage.html">Registration</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubMenu(event, 'student-submenu')">Student Registration</a>
+                <ul id="student-submenu">
+                    <li>
+                        <a href="#" onclick="toggleSubMenu(event, 'merit-submenu')">Merit List</a>
+                    </li>
+                    <li><a href="#selected-student-form">Selected Student Form</a></li>
+                    <li><a href="#admission-receipt">Admission Receipt Generate</a></li>
+                </ul>
+            </li>
+            <li><a href="#About-us">About Us</a></li>
+            <li><a href="#Sign-Up">Sign Up</a></li>
+            <li><a href="05.login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <section id="prospectus" style="background-image: url('receipt.jpg');">
+        <h1><a href="02.prospectus.html">Prospectus</a></h1>
+        <p>A college prospectus is a brochure outlining academic programs, campus life, and admissions information.</p>
+    </section>
+
+    <section id="registration" style="background-image: url('collegeMenu.jpg');">
+        <h1><a href="03.RegistrationPage.html">Registration</a></h1>
+        <p>Form to register for courses or events.</p>
+    </section>
+
+    <section id="selected-registration-form" style="background-image: url('selected-registration-form.jpg');">
+        <h1>Selected Registration Form</h1>
+        <p>Form for students who have been selected.</p>
+    </section>
+
+    <section id="merit-list" style="background-image: url('merit-list.jpg');">
+        <h1>Merit List</h1>
+        <p>Details about merit list based on percentage.</p>
+    </section>
+
+    <section id="admission-receipt" style="background-image: url('admission-receipt.jpg');">
+        <h1>Admission Receipt Generate</h1>
+        <p>Form to generate admission receipt.</p>
+    </section>
+
+    <section id="login" style="background-image: url('login.jpg');">
+        <h1><a href="05.login.html">Login</a></h1>
+        <p>Login form for accessing the system.</p>
+    </section>
+
+    <script>
+        function toggleSubMenu(event, submenuId) {
+            event.preventDefault();
+            const submenu = document.getElementById(submenuId);
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>

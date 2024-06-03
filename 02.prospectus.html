@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS - Prospectus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+            color: #932323;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(25, 0, 10, 0.7);
+            padding: 1em;
+            z-index: 10; /* Ensure nav is above other content */
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #ff7e5f;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5em;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover {
+            color: #ff7e5f;
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 2.5em;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1em;
+            border-radius: 5px;
+            list-style: none;
+            z-index: 20; /* Ensure submenu is above other content */
+        }
+
+        nav ul li ul li {
+            margin: 0;
+        }
+
+        nav ul li ul li ul {
+            left: 100%;
+            top: 0;
+        }
+
+        nav ul li ul li a {
+            padding: 0.5em;
+            display: block;
+            color: #fff;
+        }
+
+        /* Adjust submenu positioning */
+        nav ul li ul {
+            left: auto;
+            right: 0;
+        }
+
+        nav ul li:hover > ul {
+            display: block;
+        }
+
+        .back-button {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            margin-left: 1em;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+            color: white;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 2em;
+            background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 0.75em;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .form-container button:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">CMS</a>
+        <ul>
+            <li>
+                <a href="#menu" onclick="toggleSubMenu(event, 'menu-submenu')">Menu</a>
+                <ul id="menu-submenu">
+                    <li><a href="#receipt">Receipt</a></li>
+                    <li><a href="#prospectus">Prospectus</a></li>
+                    <li><a href="#registration">Registration</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubMenu(event, 'student-submenu')">Student Registration</a>
+                <ul id="student-submenu">
+                    <li>
+                        <a href="#" onclick="toggleSubMenu(event, 'merit-submenu')">Merit List</a>
+                    </li>
+                    <li><a href="#selected-student-form">Selected Student Form</a></li>
+                    <li><a href="#admission-receipt">Admission Receipt Generate</a></li>
+                </ul>
+            </li>
+            <li><a href="#About-us">About Us</a></li>
+            <li><a href="#Sign-Up">Sign Up</a></li>
+            <li><a href="05.login.html">Login</a></li>
+            <li><a href="01.Menu.html" class="back-button">Back</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <h1>Prospectus Form</h1>
+        <form>
+            <label for="course">Course</label>
+            <select id="course" name="course" onchange="updateAmount()">
+                <option value="BA-I">BA - I</option>
+                <option value="BA-II">BA - II</option>
+                <option value="BA-III">BA - III</option>
+                <option value="BSC-I">B.SC - I</option>
+                <option value="BSC-II">B.SC - II</option>
+                <option value="BSC-III">B.SC - III</option>
+                <option value="BCOM-I">B.COM - I</option>
+                <option value="BCOM-II">B.COM - II</option>
+                <option value="BCOM-III">B.COM - III</option>
+                <option value="MA-I-ECO">M.A - I (ECO)</option>
+                <option value="MA-II-ECO">M.A - II (ECO)</option>
+                <option value="MA-I-MAR">M.A - I (MAR)</option>
+                <option value="MA-II-MAR">M.A - II (MAR)</option>
+                <option value="MA-I-HIS">M.A - I (HIS)</option>
+                <option value="MA-II-HIS">M.A - II (HIS)</option>
+            </select>
+
+            <label for="title">Title</label>
+            <select id="title" name="title">
+                <option value="Mr">Mr.</option>
+                <option value="Miss">Miss</option>
+            </select>
+
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" oninput="updateFullName()">
+
+            <label for="middle-name">Middle Name</label>
+            <input type="text" id="middle-name" name="middle-name" oninput="updateFullName()">
+
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" oninput="updateFullName()">
+
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full-name" readonly>
+
+            <label for="email">Gmail</label>
+            <input type="email" id="email" name="email">
+
+            <label for="amount">Amount</label>
+            <input type="text" id="amount" name="amount" readonly>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleSubMenu(event, submenuId) {
+            event.preventDefault();
+            const submenu = document.getElementById(submenuId);
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function updateFullName() {
+            const firstName = document.getElementById('first-name').value;
+            const middleName = document.getElementById('middle-name').value;
+            const lastName = document.getElementById('last-name').value;
+            document.getElementById('full-name').value = `${firstName} ${middleName} ${lastName}`;
+        }
+
+        function updateAmount() {
+            const course = document.getElementById('course').value;
+            let amount = '';
+
+            switch (course) {
+                case 'BA-I':
+                case 'BA-II':
+                case 'BA-III':
+                    amount = '50';
+                    break;
+                case 'BSC-I':
+                case 'BSC-II':
+                case 'BSC-III':
+                    amount = '70';
+                    break;
+                case 'BCOM-I':
+                case 'BCOM-II':
+                case 'BCOM-III':
+                    amount = '60';
+                    break;
+                case 'MA-I-ECO':
+                case 'MA-II-ECO':
+                case 'MA-I-MAR':
+                case 'MA-II-MAR':
+                case 'MA-I-HIS':
+                case 'MA-II-HIS':
+                    amount = '100';
+                    break;
+                default:
+                    amount = '';
+            }
+
+            document.getElementById('amount').value = amount;
+        }
+    </script>
+</body>
+</html>

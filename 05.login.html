@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - College Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+            color: #932323;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(25, 0, 10, 0.7);
+            padding: 1em;
+            z-index: 10; /* Ensure nav is above other content */
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: #ff7e5f;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5em;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover {
+            color: #ff7e5f;
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 2.5em;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1em;
+            border-radius: 5px;
+            list-style: none;
+            z-index: 20; /* Ensure submenu is above other content */
+        }
+
+        nav ul li ul li {
+            margin: 0;
+        }
+
+        nav ul li ul li ul {
+            left: 100%;
+            top: 0;
+        }
+
+        nav ul li ul li a {
+            padding: 0.5em;
+            display: block;
+            color: #fff;
+        }
+
+        /* Adjust submenu positioning */
+        nav ul li ul {
+            left: auto;
+            right: 0;
+        }
+
+        nav ul li:hover > ul {
+            display: block;
+        }
+
+        .back-button {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            margin-left: 1em;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+            color: white;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 2em;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+            /* background: linear-gradient(to right, #ff7e5f, #feb47b); */
+           
+            /* -webkit-text-fill-color: transparent; */
+            text-align: center;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 0.75em;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .login-container button:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1em;
+        }
+
+        .forgot-password a {
+            color: #ff7e5f;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">CMS</a>
+        <ul>
+            <li>
+                <a href="#menu" onclick="toggleSubMenu(event, 'menu-submenu')">Menu</a>
+                <ul id="menu-submenu">
+                    <li><a href="#receipt">Receipt</a></li>
+                    <li><a href="#prospectus">Prospectus</a></li>
+                    <li><a href="#registration">Registration</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubMenu(event, 'student-submenu')">Student Registration</a>
+                <ul id="student-submenu">
+                    <li>
+                        <a href="#" onclick="toggleSubMenu(event, 'merit-submenu')">Merit List</a>
+                        <ul id="merit-submenu">
+                            <li><a href="#merit-by-percentage">Merit List by Percentage</a></li>
+                            <li><a href="#merit-by-caste">Merit List by Caste Category</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#selected-student-form">Selected Student Form</a></li>
+                    <li><a href="#admission-receipt">Admission Receipt Generate</a></li>
+                </ul>
+            </li>
+            <li><a href="#About-us">About Us</a></li>
+            <li><a href="#Sign-Up">Sign Up</a></li>
+            <li><a href="#login">Login</a></li>
+            <li><a href="01.Menu.html" class="back-button">Back</a></li>
+        </ul>
+    </nav>
+
+    <div class="login-container">
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <div class="forgot-password">
+            <a href="#forgot-password">Forgot your password?</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSubMenu(event, submenuId) {
+            event.preventDefault();
+            const submenu = document.getElementById(submenuId);
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
